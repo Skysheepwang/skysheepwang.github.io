@@ -8,9 +8,7 @@ logo:
 # Page metadata configurations
 head:
     # URL or path to the website's icon
-    favicon: 
-      small: img/sun-solid.svg
-      medium: img/sun-solid.svg
+    favicon: img/sun-solid.png
     # Web application manifests configuration
     # https://developer.mozilla.org/en-US/docs/Web/Manifest
     manifest:
@@ -145,7 +143,7 @@ article:
     # Whether to show estimated article reading time
     readtime: true
     # Whether to show updated time. For "auto", shows article update time only when page.updated is set and it is different from page.date
-    update_time: auto
+    update_time: false
     # Article licensing block
     licenses:
         Creative Commons:
