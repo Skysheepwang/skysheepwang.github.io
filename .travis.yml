@@ -15,7 +15,7 @@ install:
   - npm install
 before_script:
   - npm ls --depth 0
-  - ls themes/
+  - ls themes/icarus
 script:
   - hexo clean
   - hexo generate # generate static files
