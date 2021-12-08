@@ -13,6 +13,8 @@ before_install:
   - npm install hexo-theme-icarus
 install:
   - npm install
+before_script:
+  - npm ls --depth 0
 script:
   - hexo clean
   - hexo generate # generate static files
