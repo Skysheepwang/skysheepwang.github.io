@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>Category: Backend - YangGu 暘谷</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="YangGu 暘谷"><meta name="msapplication-TileImage" content="/img/sun-solid.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="YangGu 暘谷"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Tianyang Wang s personal blog 王天旸的个人博客"><meta property="og:type" content="blog"><meta property="og:title" content="YangGu 暘谷"><meta property="og:url" content="https://skysheepwang.github.io/"><meta property="og:site_name" content="YangGu 暘谷"><meta property="og:description" content="Tianyang Wang s personal blog 王天旸的个人博客"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://skysheepwang.github.io/img/og_image.png"><meta property="article:author" content="Tianyang Wang"><meta property="article:tag" content="blog"><meta property="article:tag" content="Software Engineer"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://skysheepwang.github.io"},"headline":"YangGu 暘谷","image":["https://skysheepwang.github.io/img/og_image.png"],"author":{"@type":"Person","name":"Tianyang Wang"},"publisher":{"@type":"Organization","name":"YangGu 暘谷","logo":{"@type":"ImageObject","url":{"text":"YangGu 暘谷"}}},"description":"Tianyang Wang s personal blog 王天旸的个人博客"}</script><link rel="icon" href="/img/sun-solid.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">YangGu 暘谷</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">Categories</a></li><li><a href="/categories/Software-Engineering/">Software Engineering</a></li><li class="is-active"><a href="#" aria-current="page">Backend</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-12-08T12:13:48.000Z" title="12/8/2021, 12:13:48 PM">2021-12-08</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-12-08T16:15:38.872Z" title="12/8/2021, 4:15:38 PM">2021-12-09</time></span><span class="level-item"><a class="link-muted" href="/categories/Software-Engineering/">Software Engineering</a><span> / </span><a class="link-muted" href="/categories/Software-Engineering/Backend/">Backend</a></span><span class="level-item">9 minutes read (About 1380 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/12/08/%E6%99%BA%E8%83%BD%E5%AE%A2%E6%9C%8D-%E9%97%AE%E9%A2%98%E5%AD%98%E5%82%A8%E4%B8%8E%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F/">智能客服 - 问题存储与处理系统</a></h1><div class="content"><p>本项目需要对用户输入的有效问题进行结构化存储，从而应对对新问题进行相似问题检索、返回答案的需求。</p>
+<p>思路图如下：</p>
+<img src="/2021/12/08/%E6%99%BA%E8%83%BD%E5%AE%A2%E6%9C%8D-%E9%97%AE%E9%A2%98%E5%AD%98%E5%82%A8%E4%B8%8E%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F/images/%E9%97%AE%E9%A2%98%E5%AD%98%E5%82%A8%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png" class="" title="问题存储思维导图">
+
+<h3 id="1-阈值"><a class="markdownIt-Anchor" href="#1-阈值"></a> 1. 阈值</h3>
+<p>测试方案：</p>
+<p>待测试</p>
+<h3 id="2-数据结构说明"><a class="markdownIt-Anchor" href="#2-数据结构说明"></a> 2. 数据结构说明</h3>
+<p>该数据结构基于假设——若两句话中不存在近义词，则这两句话不可能是相似的。</p>
+<p>该假设的正确性待测试。</p>
+<p>测试方案：</p>
+<p>（1）结构</p>
+<p>按照句中关键词建立倒排文档，每个词语对应包含该词语的一系列历史问题（及其对应答案、权重）</p>
+<p>具体结构如下：</p>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">index = [&#123;</span><br><span class="line">  <span class="string">&#x27;keyword&#x27;</span>: keyword,</span><br><span class="line">  <span class="string">&#x27;question_list&#x27;</span>: [(question, answer, weight)],</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>（2）方法</p>
+<p>    a) <code>generate_by_list</code> 从一线性的历史问题列表生成倒排文档</p>
+<p>    参数列表：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>question_list</code></td>
+<td><code>list</code></td>
+<td>历史问题元组的列表，每个表项为(question, answer)</td>
+</tr>
+</tbody>
+</table>
+<p>    b) <code>add_question</code> 添加新问题</p>
+<p>    参数列表：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>question</code></td>
+<td><code>String</code></td>
+<td>新问题</td>
+</tr>
+<tr>
+<td><code>answer</code></td>
+<td><code>String</code></td>
+<td>对应的答案</td>
+</tr>
+</tbody>
+</table>
+<p>    c) <code>delete_question</code> 删除问题 //todo</p>
+<p>    d) <code>update_index</code> 更新倒排文档，删除过时问题 //todo</p>
+<h2 id="二-问题处理"><a class="markdownIt-Anchor" href="#二-问题处理"></a> 二、问题处理</h2>
+<p>主要使用了python的synonyms库和jieba库。</p>
+<h3 id="1-关键词提取"><a class="markdownIt-Anchor" href="#1-关键词提取"></a> 1. 关键词提取</h3>
+<p>jieba库同时支持TF-IDF算法和TextRank算法的关键词抽取，通过对这两个算法的调查，TF-IDF是基于一较大的现成语料库进行rank；TextRank是直接对文本进行图链接矩阵计算。且二者准确度相差无几，由于本次是对较短的问题文本进行分析，故选用对短文本处理时时间、空间复杂度较低的TextRank算法。</p>
+<p>使用jieba库中的基于 TextRank 算法的关键词抽取，需要注意的是该方法中的参数：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>topK</code></td>
+<td><code>Integer</code></td>
+<td>默认<code>20</code>，设置返回关键词数量上限</td>
+</tr>
+<tr>
+<td><code>withWeight</code></td>
+<td><code>Boolean</code></td>
+<td>默认<code>False</code>，设置返回时是否包括关键词分值</td>
+</tr>
+<tr>
+<td><code>allowPOS</code></td>
+<td><code>Tuple</code></td>
+<td>默认<code>( 'ns', 'n', 'vn', 'v' )</code>，即地名、名词、动名词、动词，设置关键词词性要求</td>
+</tr>
+</tbody>
+</table>
+<p>关于停用词表的载入，由于在测试时发现jieba库自带的<code>jieba.analyse.set_stop_words()</code>方法存在问题，即在添加某些停用词后一些本应出现在关键词中的词语被过滤了，因此自定义了加载停用词的方法<code>filter_stop_words(stop_words_path)</code>，仅将出现在停用词表的词语剔除，从而确保不会错过某些关键词。</p>
+<h3 id="2-查询"><a class="markdownIt-Anchor" href="#2-查询"></a> 2. 查询</h3>
+<p>方法：</p>
+<p>a) <code>query_linear(question)</code></p>
+<p>在问题数较少时使用，全遍历所有问题，返回最高相似度评分问题，若分数过低则不返回//todo 阈值</p>
+<p>b) <code>query_inverted(question)</code></p>
+<p>使用下述过程进行检索：</p>
+<p>对于一新问题，首先提取关键词，再对较高排名的几个关键词进行查询//todo 阈值，对倒排文档的关键词索引进行遍历，使用synonyms库的<code>nearby</code>方法考察索引与待查词是否为近义词//todo 阈值，满足则将该索引后的问题加入潜在相似问题列表中，全部查询完毕后再对该列表进行遍历，逐句进行相似性判断，取最高分者的答案返回。</p>
+<p>时间复杂度分析：</p>
+<p>由上述过程，时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>m</mi><mi>n</mi><msub><mi>k</mi><mn>1</mn></msub><mo>+</mo><mi>L</mi><msub><mi>k</mi><mn>2</mn></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O(mnk_1+Lk_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathit">m</span><span class="mord mathit">n</span><span class="mord"><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s"></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mord rule" style="margin-right:0.2222222222222222em;"></span><span class="mord mathit">L</span><span class="mord"><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s"></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="katex-error" title="ParseError: KaTeX parse error: Expected &#039;EOF&#039;, got &#039;，&#039; at position 1: ，̲">，</span><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">m</span></span></span></span><span class="katex-error" title="ParseError: KaTeX parse error: Expected &#039;EOF&#039;, got &#039;为&#039; at position 1: 为̲待查问题关键词数量，">为待查问题关键词数量，</span><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">n</span></span></span></span>为关键词索引数量，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>k</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s"></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span>为<code>nearby</code>方法时间复杂度，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">L</span></span></span></span>为潜在相似问题列表长度，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>k</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">k_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s"></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span>为相似性判断时间复杂度。而全遍历的查询方法时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><msub><mi>L</mi><mrow><mi>a</mi><mi>l</mi><mi>l</mi></mrow></msub><msub><mi>k</mi><mn>2</mn></msub><mo>)</mo></mrow><annotation encoding="application/x-tex">O(L_{all}k_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathit">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">a</span><span class="mord mathit mtight" style="margin-right:0.01968em;">l</span><span class="mord mathit mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s"></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord"><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s"></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mclose">)</span></span></span></span>，那么提升空间即在于：</p>
+<p>（1）<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span>，即关键词索引数量，将互为近义词（相似度较高 // todo阈值）的索引合并，从而减少<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span>值；</p>
+<p>（2）<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>k</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">k_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.84444em;vertical-align:-0.15em;"></span>，详见下方，若使用第一种方法则固定；若使用第二种方法，可建立问题的关键词列表进行缓存，则每次判断时只需计算待查问题的关键词即可。</p>
+<h3 id="3-相似度判断"><a class="markdownIt-Anchor" href="#3-相似度判断"></a> 3. 相似度判断</h3>
+<p>（1）使用synonyms库的<code>compare</code>方法直接对两个问题生成相似度评分 //todo: 阈值</p>
+<p>（2）对两句话进行关键词提取，考察重合词语的数量以及对应的分值是否相近，如果重合词数多，且对应的词在两句中的评分靠近，则可以认为两句话是相似的。//todo 算法</p>
+<h2 id="三-改进空间"><a class="markdownIt-Anchor" href="#三-改进空间"></a> 三、改进空间</h2>
+<ol>
+<li>
+<p>在何种情况下选择何种存储、处理手段，即各种阈值的确定，有待大量的测试得出。</p>
+</li>
+<li>
+<p>synonyms的<code>compare</code>方法效果有待考证，尤其是两个词语之间的比较。未来可能会使用其<code>nearby</code>方法抽取的权重自定义距离算法。</p>
+</li>
+</ol>
+<h2 id="四-参考资料"><a class="markdownIt-Anchor" href="#四-参考资料"></a> 四、参考资料</h2>
+<p>[1] <a href="https://www.taodocs.com/p-60725933.html" target="_blank" rel="noopener">https://www.taodocs.com/p-60725933.html</a> TF-IDF, TextRank算法比较分析</p>
+<p>[2] <a href="https://blog.csdn.net/u012052268/article/details/77825981/" target="_blank" rel="noopener">https://blog.csdn.net/u012052268/article/details/77825981/</a> jieba分词、加载停用词表</p>
+<p>[3] <a href="https://github.com/fxsjy/jieba#%E8%BD%BD%E5%85%A5%E8%AF%8D%E5%85%B8" target="_blank" rel="noopener">https://github.com/fxsjy/jieba#载入词典</a> jieba github</p>
+<p>[4] <a href="https://github.com/huyingxi/Synonyms#welcome" target="_blank" rel="noopener">https://github.com/huyingxi/Synonyms#welcome</a> synonyms github</p>
+
+</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar_zuogirl.png" alt="Tianyang Wang 王天旸"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Tianyang Wang 王天旸</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Hong Kong</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">3</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Skysheepwang" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Skysheepwang"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Linkedin" href="https://www.linkedin.com/in/%E5%A4%A9%E6%97%B8-%E7%8E%8B-0b2bbb219/"><i class="fab fa-linkedin"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Mail" href="mailto:wangty16@163.com"><i class="fas fa-envelope"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">MyOnlineGame</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Software-Engineering/"><span class="level-start"><span class="level-item">Software Engineering</span></span><span class="level-end"><span class="level-item tag">2</span></span></a><ul><li><a class="level is-mobile" href="/categories/Software-Engineering/Backend/"><span class="level-start"><span class="level-item">Backend</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Software-Engineering/Testing/"><span class="level-start"><span class="level-item">Testing</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">December 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Backend/"><span class="tag">Backend</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JMeter/"><span class="tag">JMeter</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Stress-Testing/"><span class="tag">Stress Testing</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe for updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-08T12:47:40.000Z">2021-12-08</time></p><p class="title"><a href="/2021/12/08/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%83%8F%E8%BF%99%E6%A0%B7%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">如何搭建一个像这样的个人博客网站</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-08T12:13:48.000Z">2021-12-08</time></p><p class="title"><a href="/2021/12/08/%E6%99%BA%E8%83%BD%E5%AE%A2%E6%9C%8D-%E9%97%AE%E9%A2%98%E5%AD%98%E5%82%A8%E4%B8%8E%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F/">智能客服 - 问题存储与处理系统</a></p><p class="categories"><a href="/categories/Software-Engineering/">Software Engineering</a> / <a href="/categories/Software-Engineering/Backend/">Backend</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-08T11:48:53.000Z">2021-12-08</time></p><p class="title"><a href="/2021/12/08/%E4%BD%BF%E7%94%A8JMeter%E8%BF%9B%E8%A1%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">使用Jmeter工具对微信公众号后端进行压力测试</a></p><p class="categories"><a href="/categories/Software-Engineering/">Software Engineering</a> / <a href="/categories/Software-Engineering/Testing/">Testing</a></p></div></article></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">YangGu 暘谷</a><p class="is-size-7"><span>&copy; 2021 Tianyang Wang</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

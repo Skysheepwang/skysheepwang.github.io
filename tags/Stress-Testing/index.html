@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>Tag: Stress Testing - YangGu 暘谷</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="YangGu 暘谷"><meta name="msapplication-TileImage" content="/img/sun-solid.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="YangGu 暘谷"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Tianyang Wang s personal blog 王天旸的个人博客"><meta property="og:type" content="blog"><meta property="og:title" content="YangGu 暘谷"><meta property="og:url" content="https://skysheepwang.github.io/"><meta property="og:site_name" content="YangGu 暘谷"><meta property="og:description" content="Tianyang Wang s personal blog 王天旸的个人博客"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://skysheepwang.github.io/img/og_image.png"><meta property="article:author" content="Tianyang Wang"><meta property="article:tag" content="blog"><meta property="article:tag" content="Software Engineer"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://skysheepwang.github.io"},"headline":"YangGu 暘谷","image":["https://skysheepwang.github.io/img/og_image.png"],"author":{"@type":"Person","name":"Tianyang Wang"},"publisher":{"@type":"Organization","name":"YangGu 暘谷","logo":{"@type":"ImageObject","url":{"text":"YangGu 暘谷"}}},"description":"Tianyang Wang s personal blog 王天旸的个人博客"}</script><link rel="icon" href="/img/sun-solid.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/github.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">YangGu 暘谷</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">Tags</a></li><li class="is-active"><a href="#" aria-current="page">Stress Testing</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-12-08T11:48:53.000Z" title="12/8/2021, 11:48:53 AM">2021-12-08</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-12-08T16:15:38.868Z" title="12/8/2021, 4:15:38 PM">2021-12-09</time></span><span class="level-item"><a class="link-muted" href="/categories/Software-Engineering/">Software Engineering</a><span> / </span><a class="link-muted" href="/categories/Software-Engineering/Testing/">Testing</a></span><span class="level-item">7 minutes read (About 985 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2021/12/08/%E4%BD%BF%E7%94%A8JMeter%E8%BF%9B%E8%A1%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">使用Jmeter工具对微信公众号后端进行压力测试</a></h1><div class="content"><h2 id="一-jmeter环境配置"><a class="markdownIt-Anchor" href="#一-jmeter环境配置"></a> 一、JMeter环境配置</h2>
+<ol>
+<li>
+<p>根据官方文档进行安装</p>
+<p>网址：<a href="http://jmeter.apache.org/" target="_blank" rel="noopener">http://jmeter.apache.org/</a></p>
+<p>解压缩后在/bin中运行jar包即可启动GUI</p>
+</li>
+<li>
+<p>添加测试计划</p>
+<p>（1）添加线程组</p>
+<p>测试计划–右键–添加–线程–线程组</p>
+<p>（2）添加取样器</p>
+<p>根据需求选择相应的取样器，本次共使用3个Html取样器，分别对应<strong>用户绑定</strong>（即身份认证）、<strong>抢票</strong>、<strong>查票</strong>操作。</p>
+<p>（3）添加循环控制器</p>
+<p>上述3个操作应当为一个用户的基本操作流程，故应当1个线程先后进行，因此</p>
+<p>线程组–右键–添加–逻辑控制器–循环控制器，再把3个取样器放进循环控制器中即可。</p>
+<p>（4）并发量设置</p>
+<p>线程组–线程属性</p>
+<p>设置线程数（用户数量），Ramp-Up时间（测试完成的最大时间）</p>
+</li>
+<li>
+<p>添加结果分析器</p>
+<p>（1）察看结果树</p>
+<p>用于查看每一次执行的结果。</p>
+<p>取样器结果会显示线程的详细信息，数据包信息等；</p>
+<p>请求会显示Request的body和headers内容；</p>
+<p>响应数据显示Respond的body和headers内容。</p>
+<p>（2）聚合报告</p>
+<p>显示所有线程的统计结果。</p>
+</li>
+</ol>
+<h2 id="二-post内容"><a class="markdownIt-Anchor" href="#二-post内容"></a> 二、POST内容</h2>
+<ol>
+<li>
+<p>直接对服务器的api POST</p>
+<p>在这个地方我卡了很久，服务器一直返回400 bad request Error。最终发现是Content-Type的问题，本次传输的应是JSON格式，故Content-Type应为application/json</p>
+<p>在JMeter中手动改POST的Content-Type的方法为：取样器–右键–添加–配置元件–HTTP信息头管理器，再添加名称为Content-Type，值为所需值即可。</p>
+</li>
+<li>
+<p>对微信公众号接口POST</p>
+<p>这里主要参考微信官方公众平台技术文档，微信向后台传输xml格式数据，根据所需要测试的内容，本次为特定按钮，则参考“自定义菜单事件”中的内容，设置相应的参数即可。需要注意的是fromuser是openid，需要在服务器中预设；同时，不同的按钮对应的事件类型要匹配。</p>
+<p>注：不要随便在xml中插入空格！</p>
+</li>
+</ol>
+<h2 id="三-一些细节的处理"><a class="markdownIt-Anchor" href="#三-一些细节的处理"></a> 三、一些细节的处理</h2>
+<ol>
+<li>
+<p>返回乱码的处理</p>
+<p>问题出在JMeter默认的编码方式为ISO-8859-1 ，不支持中文，因此需要：</p>
+<p>取样器–右键–添加–后置处理器–Bean Shell Post Processor</p>
+<p>然后在其中Script中输入prev.setDataEncoding(“UTF-8”); 改变编码方式即可。</p>
+</li>
+<li>
+<p>动态改变POST的body</p>
+<p>本次项目需要每个模拟用户使用不同的openid，故需要在POST的body中加入脚本，动态改变openid的值：</p>
+<p><code>$&#123;__V(&quot;openid$&#123;__threadNum&#125;&quot;)&#125;</code></p>
+<p>使用如上的代码即可将线程号附在模拟openid后，从而实现每个模拟用户的信息独立。</p>
+</li>
+</ol>
+<h2 id="四-几个重要测试指标"><a class="markdownIt-Anchor" href="#四-几个重要测试指标"></a> 四、几个重要测试指标</h2>
+<p>使用取样器–右键–添加–监听器–聚合报告</p>
+<p>在聚合报告中，尤其需要注意的有：</p>
+<ul>
+<li><strong>Average</strong>：单个Request的平均响应时间，计算方法是总运行时间除以发送到服务器的总请求数，对应图形报表中的平均值。(单位是毫秒)</li>
+<li><strong>Error%</strong>：本次测试中出错率，请求的数量/请求的总数。</li>
+<li><strong>Throughput</strong>：吞吐量，默认情况下表示每秒完成的请求数。（单位：请求/秒）</li>
+<li><strong>Received</strong> <strong>KB/Sec</strong>：每秒从服务器接收到的数据量</li>
+</ul>
+<h2 id="五-参考资料"><a class="markdownIt-Anchor" href="#五-参考资料"></a> 五、参考资料</h2>
+<p>[1]<a href="https://www.cnblogs.com/tangmaokai/p/5830344.html" target="_blank" rel="noopener">https://www.cnblogs.com/tangmaokai/p/5830344.html</a></p>
+<p>[2]<a href="https://blog.csdn.net/go_pig/article/details/79570799" target="_blank" rel="noopener">https://blog.csdn.net/go_pig/article/details/79570799</a></p>
+<p>[3]<a href="http://www.51testing.com/html/28/116228-238479.html" target="_blank" rel="noopener">http://www.51testing.com/html/28/116228-238479.html</a></p>
+<p>[4]<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140454" target="_blank" rel="noopener">https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140454</a></p>
+
+</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar_zuogirl.png" alt="Tianyang Wang 王天旸"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Tianyang Wang 王天旸</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Hong Kong</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">3</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Skysheepwang" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/Skysheepwang"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Linkedin" href="https://www.linkedin.com/in/%E5%A4%A9%E6%97%B8-%E7%8E%8B-0b2bbb219/"><i class="fab fa-linkedin"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Mail" href="mailto:wangty16@163.com"><i class="fas fa-envelope"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">MyOnlineGame</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Software-Engineering/"><span class="level-start"><span class="level-item">Software Engineering</span></span><span class="level-end"><span class="level-item tag">2</span></span></a><ul><li><a class="level is-mobile" href="/categories/Software-Engineering/Backend/"><span class="level-start"><span class="level-item">Backend</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Software-Engineering/Testing/"><span class="level-start"><span class="level-item">Testing</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">December 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Backend/"><span class="tag">Backend</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JMeter/"><span class="tag">JMeter</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Stress-Testing/"><span class="tag">Stress Testing</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe for updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-08T12:47:40.000Z">2021-12-08</time></p><p class="title"><a href="/2021/12/08/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%83%8F%E8%BF%99%E6%A0%B7%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">如何搭建一个像这样的个人博客网站</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-08T12:13:48.000Z">2021-12-08</time></p><p class="title"><a href="/2021/12/08/%E6%99%BA%E8%83%BD%E5%AE%A2%E6%9C%8D-%E9%97%AE%E9%A2%98%E5%AD%98%E5%82%A8%E4%B8%8E%E5%A4%84%E7%90%86%E7%B3%BB%E7%BB%9F/">智能客服 - 问题存储与处理系统</a></p><p class="categories"><a href="/categories/Software-Engineering/">Software Engineering</a> / <a href="/categories/Software-Engineering/Backend/">Backend</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-08T11:48:53.000Z">2021-12-08</time></p><p class="title"><a href="/2021/12/08/%E4%BD%BF%E7%94%A8JMeter%E8%BF%9B%E8%A1%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">使用Jmeter工具对微信公众号后端进行压力测试</a></p><p class="categories"><a href="/categories/Software-Engineering/">Software Engineering</a> / <a href="/categories/Software-Engineering/Testing/">Testing</a></p></div></article></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">YangGu 暘谷</a><p class="is-size-7"><span>&copy; 2021 Tianyang Wang</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
