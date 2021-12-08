@@ -10,7 +10,8 @@ cache:
     - node_modules # 缓存 node_modules 加快构建速度
 before_install:
   - npm install -g hexo-cli # 在 CI 环境内安装 Hexo
-  - git clone https://github.com/ppoffice/hexo-theme-icarus.git themes/icarus
+  #- git clone https://github.com/ppoffice/hexo-theme-icarus.git themes/icarus
+  - git clone https://github.com/Skysheepwang/hexo-theme-icarus.git themes/icarus
 install:
   - npm install
 before_script:
