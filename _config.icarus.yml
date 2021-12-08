@@ -8,7 +8,9 @@ logo:
 # Page metadata configurations
 head:
     # URL or path to the website's icon
-    favicon: img/sun-solid.svg
+    favicon: 
+      small: img/sun-solid.svg
+      medium: img/sun-solid.svg
     # Web application manifests configuration
     # https://developer.mozilla.org/en-US/docs/Web/Manifest
     manifest:
